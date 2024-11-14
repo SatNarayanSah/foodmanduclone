@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 
 
 const Home = () => {
   const [restaurantData, setRestaurantDetails] = useState([]);
+  const [query, setQuery] = useState (" ")
+  const navigate = useNavigate();
+
   const getRestaurantDetails = async () => {
     const data = await fetch(
       "https://foodmandu.com/webapi/api/Vendor/GetVendors1?Cuisine=&DeliveryZoneId=1&IsFavorite=false&IsRecent=false&Keyword=&LocationLat=27.7026754&LocationLng=85.3191018&PageNo=1&PageSize=8&SortBy=4&VendorName=&VendorTags=%7B%22FEATURED%22:true%7D&VendorTagsCSV=FEATURED,&filtertags=FEATURED&search_by=restaurant"
     );
 
     const jsonData = await data.json();
-    setRestaurantDetails(jsonData);
+    setRestaurantDetails(jsonData); 
   };
 
   useEffect(() => {
-    // getRestaurantDetails();
+    getRestaurantDetails();
   });
+  
   return (
     <>
     
@@ -38,14 +42,28 @@ const Home = () => {
           </p>
           <div className="flex flex-wrap">
             <input
+            onChange={(e) =>{
+              setQuery(e.target.value);
+            }}
+            value={query}
+
+            onKeyDown={(e) =>{
+              if(e.code==='KeyE'){
+                navigate("restaurants?query=" + query)
+              }
+            }}
+
+
               className="p-4 outline-none w-96"
               type="text"
               placeholder="search you food here"
             />
-            <button className="bg-yellow-400 px-12" type="submit">
+            <Link to={"restaurants?query=" + query}>
+            <button className="bg-yellow-400 px-12 py-5" type="submit">
               {" "}
-              Find you resturent
+              Find your R esturent
             </button>
+            </Link>
           </div>
         </div>
       </div>

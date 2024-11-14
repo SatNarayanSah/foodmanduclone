@@ -1,44 +1,51 @@
-import React from "react";
-import { BiLocationPlus } from "react-icons/bi";
-import { FaHamburger } from "react-icons/fa";
-import { RiMotorbikeFill } from "react-icons/ri";
-
+import { RiMapPin2Fill } from "react-icons/ri";
+import { MdPedalBike } from "react-icons/md";
+import { IoFastFood } from "react-icons/io5";
 const Card = (props) => {
-    const {propData} = props;
-    const {VendorListingWebImageName, Name, Address1, DeliveryDistanceStr,CuisineTags} = propData
-
-
-
+  const { propData } = props;
+  const {
+    VendorListingWebImageName,
+    Name,
+    Address1,
+    DeliveryDistanceStr,
+    CuisineTags,
+  } = propData;
   return (
-    <div className=" flex flex-wrap gap-3 justify-center ">
-      <div className="">
-        <img
-          className="w-80 h-80 rounded-lg"
-          src={VendorListingWebImageName}
-          alt="image"
-        />
-        <div className="p-3">
-          <div className="text-center text-lime-900  flex flex-wrap font-bold">
-            {Name}
+    <div className=" h-80 w-96 border-[1px] shadow-md border-black  rounded-md">
+      <img
+        className="h-1/2 w-full rounded-md"
+        src={VendorListingWebImageName}
+        alt=""
+      />
+      <div className="flex flex-col gap-1 p-4">
+        <p>{Name}</p>
+        <div className="flex gap-4">
+          <div className="flex items-center">
+            <RiMapPin2Fill />
+            {Address1}
           </div>
-          <div className="flex gap-1">
-            <div className="flex  items-center font-semibold">
-              <BiLocationPlus /> {Address1}
-            </div>
-            <div className="flex  items-center font-semibold ">
-
-            <RiMotorbikeFill /> {DeliveryDistanceStr}
-            </div>
+          <div className="flex items-center">
+            <MdPedalBike />
+            {DeliveryDistanceStr}
           </div>
-            <div className="flex  items-center font-semibold">
-              <FaHamburger /> {CuisineTags}
-            </div>
+        </div>
+        <div className="flex items-center overflow-hidden whitespace-nowrap text-ellipsis">
+        <span className=" items-start flex justify-start">
+        <IoFastFood />
+        </span>
+          <span className="ml-1 overflow-hidden whitespace-nowrap text-ellipsis">{CuisineTags}</span>
         </div>
       </div>
-      
-      
     </div>
   );
 };
-
 export default Card;
+
+
+
+
+
+
+
+
+
